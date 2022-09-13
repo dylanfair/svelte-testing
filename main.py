@@ -7,12 +7,13 @@ import random
 
 app = FastAPI()
 
-app.mount("/front", StaticFiles(directory="front/public", html=True), name="front")
-app.mount("/build", StaticFiles(directory="front/public/build", html=True), name="build")
+app.mount("/svelte-front", StaticFiles(directory="svelte-front/public", html=True), name="svelte-front")
+
 
 origins = [
     "http://localhost",
-    "http://localhost:8080"
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
 ]
 
 app.add_middleware(
@@ -29,4 +30,4 @@ async def rand():
 
 @app.get("/")
 async def front():
-    return RedirectResponse(url="front")
+    return RedirectResponse(url="svelte-front")
