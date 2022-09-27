@@ -7,7 +7,7 @@ import random
 
 app = FastAPI()
 
-app.mount("/svelte-front", StaticFiles(directory="svelte-front/public", html=True), name="svelte-front")
+#app.mount("/svelte-front", StaticFiles(directory="../svelte-front/public", html=True), name="svelte-front")
 
 
 origins = [

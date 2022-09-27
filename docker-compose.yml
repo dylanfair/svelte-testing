@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: svelte-back/
+      dockerfile: Dockerfile
+    image: svelete-app
+    ports:
+      - 5000:5000
+
+  frontend:
+    build:
+      context: svelte-front/
+      dockerfile: Dockerfile
+    image: svelete-app
+    ports:
+    - 5173:5173
+    depends_on: ["backend"]
