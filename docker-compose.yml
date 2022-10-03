@@ -5,7 +5,7 @@ services:
     build:
       context: svelte-back/
       dockerfile: Dockerfile
-    image: svelete-app
+    image: svelte-app-backend
     ports:
       - 5000:5000
 
@@ -13,7 +13,7 @@ services:
     build:
       context: svelte-front/
       dockerfile: Dockerfile
-    image: svelete-app
+    image: svelte-app-frontend
     ports:
-    - 5173:5173
+    - 5173:80
     depends_on: ["backend"]
