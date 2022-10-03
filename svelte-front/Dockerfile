@@ -14,7 +14,7 @@ COPY . ./
 
 RUN npm run build
 
-WORKDIR dist
+#WORKDIR dist
 
 FROM nginx:1.19-alpine
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
