@@ -36,4 +36,4 @@ async def rand():
 
 @app.get("/")
 async def front():
-    return RedirectResponse(url="svelte-front")
+    return "Hi!"
