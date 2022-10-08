@@ -6,7 +6,7 @@
   "homepage": "https://dylanfair.github.io/svelte-testing",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=./",
     "preview": "vite preview"
   },
   "devDependencies": {
