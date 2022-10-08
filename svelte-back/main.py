@@ -19,7 +19,8 @@ origins = [
     "http://localhost:4173",
     "http://127.0.0.1:4173",
     "http://0.0.0.0:4173",
-    "https://0.0.0.0:4173"
+    "https://0.0.0.0:4173",
+    "https://dylanfair.github.io/svelte-testing/"
 ]
 
 app.add_middleware(
