@@ -10,26 +10,26 @@ app = FastAPI()
 #app.mount("/svelte-front", StaticFiles(directory="../svelte-front/public", html=True), name="svelte-front")
 
 
-origins = [
-    "http://localhost",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://0.0.0.0:5173",
-    "https://0.0.0.0:5173",
-    "http://localhost:4173",
-    "http://127.0.0.1:4173",
-    "http://0.0.0.0:4173",
-    "https://0.0.0.0:4173",
-    "https://dylanfair.github.io/svelte-testing"
-]
+# origins = [
+#     "http://localhost",
+#     "http://localhost:5173",
+#     "http://127.0.0.1:5173",
+#     "http://0.0.0.0:5173",
+#     "https://0.0.0.0:5173",
+#     "http://localhost:4173",
+#     "http://127.0.0.1:4173",
+#     "http://0.0.0.0:4173",
+#     "https://0.0.0.0:4173",
+#     "https://dylanfair.github.io/svelte-testing"
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 @app.get("/rand")
 async def rand():
