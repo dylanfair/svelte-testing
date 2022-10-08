@@ -2,7 +2,7 @@
 	let rand = "-1";
 
     function getRand() {
-        fetch("http://localhost:5000/rand")
+        fetch("https://svelte-testing-nddqi3no6a-uc.a.run.app/rand")
         .then(d => d.text())
         .then(d => (rand = d));
     }
