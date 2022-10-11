@@ -16,14 +16,11 @@
         })
         console.log(res)
 
-        // fetch("http://localhost:8080/success")
-        //     .then(d => d.text())
-        //     .then(d => (text = d))
         // Do I want the response to just be a true or false to keep things simple?
-        const success = await res.text()
+        const success = await res.json()
         console.log(success)
 
-        if (success === '"Success!"') {
+        if (success.message == true) {
             $store = `${username}`
         } else {
             text = "Incorrect, try again"
