@@ -1,9 +1,10 @@
 <script>
-    let text = '0';
+    import { store } from "../hooks/auth";
+
+    let text = 'Login below to check your todo list!';
     // send data to backend API?
     let username = '';
     let password = '';
-    let result = null;
 
     async function login() {        
         const res = await fetch("http://localhost:8080/token", {
@@ -21,9 +22,9 @@
         // Do I want the response to just be a true or false to keep things simple?
         const success = await res.text()
         console.log(success)
-        // result = JSON.stringify(json)
+
         if (success === '"Success!"') {
-            text = "You are logged in!"
+            $store = `${username}`
         } else {
             text = "Incorrect, try again"
         }
@@ -32,6 +33,8 @@
 </script>
 
 <main>
+    <p>{text}</p>
+
     <form on:submit|preventDefault={login} class="ui login-form">
                     
         <label for="username">Username</label>
@@ -48,6 +51,4 @@
         <br>
         <button class="ui blue form-button" type="submit">Login</button>
     </form>
-    
-    <p>{text}</p>
 </main>
