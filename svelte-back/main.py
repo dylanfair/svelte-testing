@@ -10,7 +10,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_login import LoginManager
 
-#from database import UserModel, Todos, users_ref
+from pydantic import BaseModel
+
+from database import UserModel, Todos, users_ref
 
 """ Trying to read in secret key """
 load_dotenv()
@@ -101,25 +103,35 @@ def submit_login(request: Request):
         response = RedirectResponse(url="/", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
         return response
 
+
 # This handles regular login for the front end
 @app.post("/token", include_in_schema=False)
-async def login(request: Request, data: OAuth2PasswordRequestForm = Depends()):
-    username = data.username
-    password = data.password
+async def login(
+    request: Request, 
+    #data: OAuth2PasswordRequestForm = Depends()
+):
+    json_request = await request.json()
+    username = json_request.get("username")
+    password = json_request.get("password")
+    # username = data.username
+    # password = data.password
     user = await query_firestore_user(username)
 
     if user is None:
         login_fail = True
-        return RedirectResponse(url="/fail", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+        return "Fail"
+        #return RedirectResponse(url="/fail", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
     if not verify_password(password, user['password']):
         login_fail = True
-        return RedirectResponse(url="/fail", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+        return "Fail"
+        #return RedirectResponse(url="/fail", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
 
     access_token = manager.create_access_token(
         data = {"sub": username}
     )
     
-    resp = RedirectResponse(url="/success", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
-    manager.set_cookie(resp, access_token)
+    resp = "Success!"
+    #resp = RedirectResponse(url="/success", status_code=status.HTTP_307_TEMPORARY_REDIRECT)
+    #manager.set_cookie(resp, access_token)
     return resp
