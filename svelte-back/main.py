@@ -141,10 +141,17 @@ async def login(
     manager.set_cookie(response, access_token)
     return resp
 
-@app.get("/{username}/todos")
-async def read_todos(request: Request, username: str):
-    # username2 = user['username']
-    # user_todos = user['todos']
+@app.post("/todos")
+async def read_todos(request: Request):
+    json_request = await request.json()
+    username = json_request.get("username")
+    password = json_request.get("password")
+
+    user = await query_firestore_user(username)
+    if not verify_password(password, user['password']):
+        return {"message": False}
+        
+
 
     # return user_todos
     headers = request.headers
