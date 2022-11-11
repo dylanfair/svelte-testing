@@ -6,8 +6,12 @@
 
     // Query database for Todos given the user which is in 'store'
     async function fetch_todos(){
-        const todos_response = await fetch(`http://localhost:8080/${$store}/todos`, {
-            headers: {"username": `${$store}`}
+        const todos_response = await fetch(`http://localhost:8080/todos`, {
+            method: 'POST',
+            body: JSON.stringify({
+                "username": `${$store.username}`,
+                "password": `${$store.password}`
+            })
             // credentials: 'include',
         });
         const data = await todos_response.text();
@@ -20,7 +24,7 @@
     
 </script>
 
-<p>Welcome {$store}</p>
+<p>Welcome {$store.username}</p>
 
 <ul>
     {#each todos_list as { todo, complete} }

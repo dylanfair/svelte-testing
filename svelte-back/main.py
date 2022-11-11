@@ -120,8 +120,6 @@ async def login(
     json_request = await request.json()
     username = json_request.get("username")
     password = json_request.get("password")
-    # username = data.username
-    # password = data.password
     user = await query_firestore_user(username)
 
     if user is None:
@@ -150,18 +148,6 @@ async def read_todos(request: Request):
     user = await query_firestore_user(username)
     if not verify_password(password, user['password']):
         return {"message": False}
-        
 
-
-    # return user_todos
-    headers = request.headers
-    if headers.get("username") == username: 
-        user = await query_firestore_user(username)
-        user_todos = user['todos']
-        return user_todos
-
-    # user = await query_firestore_user(username)
-    # user_todos = user['todos']
-    # return user_todos
-
-    return "Error!"
+    user_todos = user['todos']
+    return user_todos

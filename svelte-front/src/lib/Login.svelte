@@ -21,7 +21,8 @@
         console.log(success)
 
         if (success.message == true) {
-            $store = `${username}`
+            $store.username = `${username}`
+            $store.password = `${password}`
         } else {
             text = "Incorrect, try again"
         }
