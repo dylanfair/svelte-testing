@@ -3,7 +3,7 @@
 
 
     async function logout() {
-        $store = null;
+        $store.username = null;
     }
 </script>
 
